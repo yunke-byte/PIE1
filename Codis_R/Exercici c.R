@@ -47,10 +47,8 @@ regles <- list(R1 = R1, R2 = R2, R3 = R3)
 
 par(mfrow = c(1, 3))
 
-
-for (i in seq_along(regles)) {
-  regla <- regles[[i]]  
-  nom_regla <- names(regles)[i]  # Obtener nombre de la regla
+i <- 1
+for (regla in regles) {
   
   # Creació d'histogrames S1 i S2 amb les tres regles
   resultat_S1 <- crea_histograma("S1", regla, N, T)
@@ -58,11 +56,11 @@ for (i in seq_along(regles)) {
   
   # Histograma S1
   hist(resultat_S1, 
-       main = paste("Comparació", nom_regla),
+       main = paste("Comparació", names(regles)[i]),
        
        xlab = "Opinions",
        ylab = "Usuaris",
-       col = rgb(1, 0, 0, 0.5),  # Rojo semitransparente
+       col = rgb(1, 0, 0, 0.5),  # Vermell
        border = "black",
        freq = F
        )  
@@ -74,5 +72,5 @@ for (i in seq_along(regles)) {
        border = "black",
        freq = F,
        add = TRUE)  
-  
+  i <- i + 1
 }
