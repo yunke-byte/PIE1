@@ -7,16 +7,16 @@ moure_dreta <- function(i){
   i + ((1-i)/4)
 }
 
-#Regles
-R1 <- function(x){  # Retorna TRUE si mostra contingut d'esquerres
+#Regles (Retorna TRUE si mostra contingut d'esquerres)
+R1 <- function(x){  
   runif(1) <= ((1-x)^2 / ((1+x)^2 + (1-x)^2)) 
 }
 
-R2 <- function(x){  # Retorna TRUE si mostra contingut d'esquerres
+R2 <- function(x){  
   runif(1) <= (1-x)/2
 }
 
-R3 <- function(x){  # Retorna TRUE si mostra contingut d'esquerres
+R3 <- function(x){  
   runif(1) <= (1+x)/2
 }
 
@@ -30,10 +30,15 @@ surt_cansat <- function(x){  # L'usuari abandona al veure contingut del mateix b
   runif(1) <= 0.05
 }
 
+####################################################
+############ Funcions per l'apartat e) #############
+####################################################
+
 esquerra <- function(x){#Retorn True si l'usuari és d'esquerres
   return (x < 0)
   }
 
+#Funció que retorna la distribució triada
 assigna_distribucio <- function(escenari){
   if (escenari == "S1") {#Distribució uniforme
     return(x <- runif(N, min = -1, max = 1))
@@ -42,7 +47,8 @@ assigna_distribucio <- function(escenari){
   }
 }
 
-# Funció per simular els continguts consumits al llarg del temps
+############################!!!!Important!!!!#################################
+######Funció per simular els continguts consumits al llarg del temps##########
 
 continguts_consumits <- function(distribucio, regla, N, T) {
   # Escollim distribucio
@@ -115,14 +121,23 @@ continguts_consumits <- function(distribucio, regla, N, T) {
   return(comptador[ha_sortit])
 }
 
+####################################################
+################# Constants#########################
+####################################################
+
 # Paràmetres fixes
 N <- 10000
 T <- 20
+
 
 #Llistes per simplificar codi
 resultats <- list()
 distribucions <- list("S1", "S2")
 regles <- list(R1 = R1, R2 = R2, R3 = R3)
+
+################################################
+############## Histogrames #####################
+################################################
 
 #Visualitzar els 6 histogrames a la vegada
 par(mfrow = c(2, 3))
@@ -164,14 +179,14 @@ i <- 1
   }
   i <- 1
 
-
-#Gràfics superposats
+#######################################################
+#################Gràfics superposats###################
+#######################################################
 
 par(mfrow = c(1, 3))
 
-for (i in seq_along(regles)) {
-  regla <- regles[[i]]  
-  nom_regla <- names(regles)[i]  # Obtener nombre de la regla
+i<- 1
+for (regla in regles) {
   
   # Creació d'histogrames S1 i S2 amb les tres regles
   resultat_S1 <- continguts_consumits("S1", regla, N, T)
@@ -179,7 +194,7 @@ for (i in seq_along(regles)) {
   
   # Histograma S1
   hist(resultat_S1, 
-       main = paste("Comparació", nom_regla),
+       main = paste("Comparació", names(regles)[i]),
        
        xlab = "Nombre de Continguts",
        ylab = "Usuaris abandonant",
@@ -197,7 +212,7 @@ for (i in seq_along(regles)) {
        freq = F,
        ylim = c(0,0.5),
        add = TRUE)  
-  
+  i < i + 1
 }
 
 
