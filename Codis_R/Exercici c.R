@@ -54,6 +54,15 @@ for (regla in regles) {
   resultat_S1 <- crea_histograma("S1", regla, N, T)
   resultat_S2 <- crea_histograma("S2", regla, N, T)
   
+  esp_S1 <- mean(resultat_S1)
+  esp_S2 <- mean(resultat_S2)
+  
+  var_S1 <- var(resultat_S1)
+  var_S2 <- var(resultat_S2)
+  
+  cat("Regla:", names(regles)[i], "\n")
+  cat("   Esperanza en S1:", esp_S1, "Variança en S1: ", var_S1, "\n")
+  cat("   Esperanza en S2:", esp_S2, "Variança en S2", var_S2, "\n")
   # Histograma S1
   hist(resultat_S1, 
        main = paste("Comparació", names(regles)[i]),
@@ -73,4 +82,7 @@ for (regla in regles) {
        freq = F,
        add = TRUE)  
   i <- i + 1
+  
+  
+  
 }

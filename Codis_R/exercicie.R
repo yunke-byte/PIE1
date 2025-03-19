@@ -145,38 +145,46 @@ par(mfrow = c(2, 3))
 i <- 1
 
 #Histogrames S1 sense superposar-se
-
+cat("Distribució S1: ", "\n")
   
   for (regla in regles){
     resultats<- continguts_consumits("S1", regla, N, T)
+    esp_S1 <- mean(resultats)
+    var_S1 <- var(resultats)
     hist(resultats,
          main = paste("Cas","S1", names(regles)[i]),
-         breaks= T,
-         xlab = "Continguts consumits",
-         ylab = "Usuaris(%)",
+         breaks= T + 2,
+         xlab = "Continguts consumits(T)",
+         ylab = "Usuaris abandonant",
          ylim = c(0, 0.5),
          freq = F,
          col = rgb(1, 0, 0, 0.5),  # Vermell
          border = "black")
+    cat(names(regles)[i], "\n")
+    cat("Esperança : ", esp_S1," Variança :", var_S1 , "\n")
     i <- i + 1
   }
-  i <- 1
-  
-  #Histogrames S2 sense superposar-se
-  
-  for (regla in regles){
-    resultats<- continguts_consumits("S2", regla, N, T)
-    hist(resultats,
-         main = paste("Cas","S2", names(regles)[i]),
-         breaks= T,
-         xlab = "Continguts consumits",
-         ylab = "Usuaris(%)",
-         ylim = c(0, 0.5),
-         freq = F,
-         col = rgb(0, 0, 1, 0.5),  
-         border = "black" )
-    i <- i + 1
-  }
+i<- 1
+
+cat("Distribució S2: ", "\n")
+
+for (regla in regles){
+  resultats<- continguts_consumits("S2", regla, N, T)
+  esp_S2 <- mean(resultats)
+  var_S2 <- var(resultats)
+  hist(resultats,
+       main = paste("Cas","S2", names(regles)[i]),
+       breaks= T + 2,
+       xlab = "Continguts consumits(T)",
+       ylab = "Usuaris abandonant",
+       ylim = c(0, 0.5),
+       freq = F,
+       col = rgb(0, 0, 1, 0.5),  # Blau
+       border = "black")
+  cat(names(regles)[i], "\n")
+  cat("Esperança : ", esp_S2," Variança :", var_S2, "\n")
+  i <- i + 1
+}
   i <- 1
 
 #######################################################
